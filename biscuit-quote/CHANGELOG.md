@@ -1,3 +1,8 @@
+# `0.4.0-r1`
+
+- Fork release based on upstream `main` at 93832a8, whose `0.4.0` entry below is unreleased upstream. Its source differs from the published 0.3.0.
+- Published as `biscuit-quote-atestum`; the library keeps the `biscuit_quote` import path.
+
 # `0.4.0`
 
 - macro parameters are set through `set_lenient` and `set_scope_lenient` instead of the dedicated
