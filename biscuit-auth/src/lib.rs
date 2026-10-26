@@ -31,7 +31,7 @@
 //! ```rust
 //! extern crate biscuit_auth as biscuit;
 //!
-//! use biscuit::{PrivateKey, Biscuit, Authorizer, builder::*, error, macros::*};
+//! use biscuit::{AuthorizerLimits, PrivateKey, Biscuit, Authorizer, builder::*, error, macros::*};
 //!
 //! fn main() -> Result<(), error::Token> {
 //!   // let's generate the root key pair. The root public key will be necessary
@@ -122,8 +122,13 @@
 //!   "#)
 //!   .build(&biscuit2)?;
 //!
-//!   // the token restricts to read operations:
-//!   assert!(v1.authorize().is_ok());
+//!   // the token restricts to read operations. The default time limit of an authorizer
+//!   // is 1ms, which a busy machine can exceed, so this example allows 10 seconds
+//!   let limits = AuthorizerLimits {
+//!     max_time: std::time::Duration::from_secs(10),
+//!     ..Default::default()
+//!   };
+//!   assert!(v1.authorize_with_limits(limits).is_ok());
 //!   // the second authorizer requested a read operation
 //!   assert!(v2.authorize().is_err());
 //!   // the third authorizer requests /a/file2.txt
