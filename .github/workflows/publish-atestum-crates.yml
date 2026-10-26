@@ -1,0 +1,110 @@
+name: Publish an atestum crate
+
+# A release branch or tag names one crate and its version: `release-<crate>-<version>`
+# for a branch, `<crate>-<version>` for a tag, where <crate> ends in -atestum.
+# Preflight runs on every such branch push and tag: it packages the crate, tests it,
+# and tests the packaged copy against crates.io dependencies. Only a tag publishes,
+# and only after preflight passes. Publish in dependency order: biscuit-parser-atestum,
+# then biscuit-quote-atestum, then biscuit-auth-atestum.
+on:
+  push:
+    branches:
+      - "release-biscuit-*-atestum-*"
+    tags:
+      - "biscuit-*-atestum-*"
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    outputs:
+      crate: ${{ steps.release.outputs.crate }}
+      version: ${{ steps.release.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Name the crate and check the ref matches its version
+        id: release
+        run: |
+          ref="${GITHUB_REF_NAME#release-}"
+          crate="${ref%%-[0-9]*}"
+          version=$(sed -n 's/^version = "\(.*\)"/\1/p' "${crate%-atestum}/Cargo.toml" | head -n 1)
+          if [ "$ref" != "$crate-$version" ]; then
+            echo "::error::ref $GITHUB_REF_NAME does not match $crate-$version"
+            exit 1
+          fi
+          echo "crate=$crate" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - name: Install protoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y protobuf-compiler
+      - name: List packaged files
+        env:
+          CRATE: ${{ steps.release.outputs.crate }}
+        run: cargo package -p "$CRATE" --list
+      - name: Run tests
+        env:
+          CRATE: ${{ steps.release.outputs.crate }}
+        run: |
+          case "$CRATE" in
+            biscuit-auth-atestum) features="serde-error,bwk" ;;
+            biscuit-parser-atestum) features="serde-error" ;;
+            *) features="" ;;
+          esac
+          cargo test -p "$CRATE" ${features:+--features="$features"} --verbose
+      - name: Build docs (a broken intra-doc link fails the run)
+        env:
+          CRATE: ${{ steps.release.outputs.crate }}
+          RUSTDOCFLAGS: "-D rustdoc::broken_intra_doc_links"
+        run: cargo doc -p "$CRATE" --no-deps
+      - name: Package (verifies the packaged crate builds)
+        env:
+          CRATE: ${{ steps.release.outputs.crate }}
+        run: cargo package -p "$CRATE"
+      - name: Run tests against the packaged crate
+        # Resolves dependencies from crates.io, as a consumer of the release would.
+        # biscuit-quote-atestum is skipped: packaging strips its path-only dev-dependency
+        # on biscuit-auth-atestum, which its tests need. The workspace run above covers them.
+        env:
+          CRATE: ${{ steps.release.outputs.crate }}
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          if [ "$CRATE" = "biscuit-quote-atestum" ]; then
+            echo "skipped for $CRATE: its tests need the stripped dev-dependency"
+            exit 0
+          fi
+          case "$CRATE" in
+            biscuit-auth-atestum) features="serde-error,bwk" ;;
+            biscuit-parser-atestum) features="serde-error" ;;
+          esac
+          mkdir -p "$RUNNER_TEMP/consumer"
+          tar -xzf "target/package/$CRATE-$VERSION.crate" -C "$RUNNER_TEMP/consumer"
+          cd "$RUNNER_TEMP/consumer/$CRATE-$VERSION"
+          cargo test ${features:+--features="$features"} --verbose
+
+  publish:
+    needs: preflight
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    env:
+      CRATE: ${{ needs.preflight.outputs.crate }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install protoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y protobuf-compiler
+      - name: Publish to crates.io
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: |
+          if [ -z "$CARGO_REGISTRY_TOKEN" ]; then
+            echo "::error::repository secret CARGO_REGISTRY_TOKEN is not set"
+            exit 1
+          fi
+          cargo publish -p "$CRATE"
