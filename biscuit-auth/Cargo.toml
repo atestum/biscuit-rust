@@ -9,8 +9,6 @@ license = "Apache-2.0"
 documentation = "https://docs.rs/biscuit-auth-atestum"
 homepage = "https://github.com/biscuit-auth/biscuit"
 repository = "https://github.com/atestum/biscuit-rust"
-# the repository does not track Cargo.lock
-exclude = ["Cargo.lock"]
 
 [lib]
 # keeps the upstream import path: code keeps using biscuit_auth::

@@ -7,8 +7,6 @@ authors = ["Clément Delafargue <clement@delafargue.name>", "Geoffroy Couprie <c
 license = "Apache-2.0"
 documentation = "https://docs.rs/biscuit-quote-atestum"
 repository = "https://github.com/atestum/biscuit-rust"
-# the repository does not track Cargo.lock
-exclude = ["Cargo.lock"]
 
 [lib]
 name = "biscuit_quote"
