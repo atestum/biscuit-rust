@@ -46,7 +46,7 @@ serde = { version = "1.0.132", optional = true, features = ["derive"] }
 time = { version = "0.3.7", features = ["formatting", "parsing"] }
 uuid = { version = "1", optional = true }
 biscuit-parser = { package = "biscuit-parser-atestum", version = "0.2.0-r1", path = "../biscuit-parser" }
-biscuit-quote = { package = "biscuit-quote-atestum", version = "0.4.0-r1", optional = true, path = "../biscuit-quote" }
+biscuit-quote = { package = "biscuit-quote-atestum", version = "0.3.0-r1", optional = true, path = "../biscuit-quote" }
 chrono = { version = "0.4.26", optional = true, default-features = false, features = [
   "serde",
 ] }

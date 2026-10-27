@@ -1,6 +1,6 @@
 [package]
 name = "biscuit-quote-atestum"
-version = "0.4.0-r1"
+version = "0.3.0-r1"
 edition = "2021"
 description = "macros for compile time datalog parsing for Biscuit authorization tokens"
 authors = ["Clément Delafargue <clement@delafargue.name>", "Geoffroy Couprie <contact@geoffroycouprie.com>"]
