@@ -1,22 +1,27 @@
 [package]
-name = "biscuit-quote"
-version = "0.3.0"
+name = "biscuit-quote-atestum"
+version = "0.4.0-r1"
 edition = "2021"
 description = "macros for compile time datalog parsing for Biscuit authorization tokens"
 authors = ["Clément Delafargue <clement@delafargue.name>", "Geoffroy Couprie <contact@geoffroycouprie.com>"]
 license = "Apache-2.0"
+documentation = "https://docs.rs/biscuit-quote-atestum"
+repository = "https://github.com/atestum/biscuit-rust"
+# the repository does not track Cargo.lock
+exclude = ["Cargo.lock"]
 
 [lib]
+name = "biscuit_quote"
 proc-macro = true
 
 [dependencies]
-biscuit-parser = { path = "../biscuit-parser", features = ["datalog-macro"], version = "0.2.0" }
+biscuit-parser = { package = "biscuit-parser-atestum", path = "../biscuit-parser", features = ["datalog-macro"], version = "0.2.0-r1" }
 proc-macro2 = "1"
 quote = "1.0.14"
 syn = { version = "2.0.117", features = ["full", "extra-traits"] }
 manyhow = "0.11"
 
 [dev-dependencies]
-biscuit-auth = { path = "../biscuit-auth" }
+biscuit-auth = { package = "biscuit-auth-atestum", path = "../biscuit-auth" }
 hex = "0.4.3"
 trybuild = "1.0.116"

@@ -1,14 +1,20 @@
 [package]
-name = "biscuit-parser"
-version = "0.2.0"
+name = "biscuit-parser-atestum"
+version = "0.2.0-r1"
 edition = "2021"
 authors = ["Clément Delafargue <clement@delafargue.name>", "Geoffroy Couprie <contact@geoffroycouprie.com>"]
 description = "Datalog parser used in the biscuit-auth and biscuit-quote crates"
 license = "Apache-2.0"
-documentation = "https://docs.rs/biscuit-auth"
+documentation = "https://docs.rs/biscuit-parser-atestum"
 homepage = "https://github.com/biscuit-auth/biscuit"
-repository = "https://github.com/biscuit-auth/biscuit-rust"
+repository = "https://github.com/atestum/biscuit-rust"
+# the repository does not track Cargo.lock
+exclude = ["Cargo.lock"]
 
+
+[lib]
+# keeps the upstream import path: code keeps using biscuit_parser::
+name = "biscuit_parser"
 
 [dependencies]
 hex = "0.4.3"

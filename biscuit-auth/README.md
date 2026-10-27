@@ -1,5 +1,7 @@
 # Eclipse Biscuit authentication and authorization token
 
+> This is `biscuit-auth-atestum`, a fork of [biscuit-auth](https://crates.io/crates/biscuit-auth) (source: https://github.com/atestum/biscuit-rust). It is based on upstream `main` at 93832a8, whose published version is 6.0.0 and whose CHANGELOG heads the unreleased 7.0.0. A version `6.0.0-rN` is fork release N on top of that. It depends on the fork's `biscuit-parser-atestum` and `biscuit-quote-atestum` releases. The import path is unchanged, so depend on it with `biscuit-auth = { package = "biscuit-auth-atestum", version = "6.0.0-r1" }`. Semver treats `-rN` as a pre-release: a requirement of `6` or `6.0.0` does not select it, so write the full version.
+
 Eclipse Biscuit is an authorization token for microservices architectures with the following properties:
 
 - decentralized validation: any node could validate the token only with public information;
