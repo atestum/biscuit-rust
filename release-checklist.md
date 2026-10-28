@@ -51,3 +51,12 @@ Depending on the actual changes, only a subset of the crates may need to be rele
   - `biscuit-parser`
   - `biscuit-quote`
   - `biscuit-auth`
+
+## Atestum fork crates
+
+`biscuit-parser-atestum`, `biscuit-quote-atestum` and `biscuit-auth-atestum` are released from this fork by `.github/workflows/publish-atestum-crates.yml`. The steps above do not apply to them.
+
+- Push a release branch named `release-<crate>-<version>`, or a tag named `<crate>-<version>`, where `<crate>` ends in `-atestum` (for example the tag `biscuit-auth-atestum-6.0.0-r1`). Preflight then packages the crate, tests it, and tests the packaged copy against crates.io dependencies.
+- Only a tag publishes, and only after preflight passes.
+- Publish in dependency order: `biscuit-parser-atestum`, then `biscuit-quote-atestum`, then `biscuit-auth-atestum`.
+- A merge into `main` publishes nothing.
