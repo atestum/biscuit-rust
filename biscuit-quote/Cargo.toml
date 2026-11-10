@@ -1,6 +1,6 @@
 [package]
 name = "biscuit-quote-atestum"
-version = "0.4.0-r1"
+version = "0.3.0-r2"
 edition = "2021"
 description = "macros for compile time datalog parsing for Biscuit authorization tokens"
 authors = ["Clément Delafargue <clement@delafargue.name>", "Geoffroy Couprie <contact@geoffroycouprie.com>"]
@@ -13,7 +13,7 @@ name = "biscuit_quote"
 proc-macro = true
 
 [dependencies]
-biscuit-parser = { package = "biscuit-parser-atestum", path = "../biscuit-parser", features = ["datalog-macro"], version = "0.2.0-r1" }
+biscuit-parser = { package = "biscuit-parser-atestum", path = "../biscuit-parser", features = ["datalog-macro"], version = "0.2.0-r2" }
 proc-macro2 = "1"
 quote = "1.0.14"
 syn = { version = "2.0.117", features = ["full", "extra-traits"] }
