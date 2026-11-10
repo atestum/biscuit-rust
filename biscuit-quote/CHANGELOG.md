@@ -1,7 +1,7 @@
 # `0.4.0-r1`
 
 - Fork release based on upstream `main` at 93832a8, whose `0.4.0` entry below is unreleased upstream. Its source differs from the published 0.3.0.
-- Published as `biscuit-quote-atestum`; the library keeps the `biscuit_quote` import path.
+- Not yet published; the latest published release is `0.3.0-r1`. It will be published as `biscuit-quote-atestum`, and the library keeps the `biscuit_quote` import path.
 
 # `0.4.0`
 

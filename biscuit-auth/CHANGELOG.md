@@ -2,7 +2,7 @@
 
 - Fork release based on upstream `main` at 93832a8. The `7.0.0` entries below are upstream's, unreleased at that commit.
 - Depends on the fork's `biscuit-parser-atestum` 0.2.0-r1 and `biscuit-quote-atestum` 0.4.0-r1, not on the registry copies of upstream's crates. No source changes beyond the package renames.
-- Published as `biscuit-auth-atestum`; the library keeps the `biscuit_auth` import path.
+- Not yet published; the latest published release is `6.0.0-r1`. It will be published as `biscuit-auth-atestum`, and the library keeps the `biscuit_auth` import path.
 
 # `7.0.0`
 
