@@ -1,3 +1,9 @@
+# `7.0.0-r1`
+
+- Fork release based on upstream `main` at 93832a8. The `7.0.0` entries below are upstream's, unreleased at that commit.
+- Depends on the fork's `biscuit-parser-atestum` 0.2.0-r1 and `biscuit-quote-atestum` 0.4.0-r1, not on the registry copies of upstream's crates. No source changes beyond the package renames.
+- Published as `biscuit-auth-atestum`; the library keeps the `biscuit_auth` import path.
+
 # `7.0.0`
 
 - Abstract biscuits over the crypto implementation (#334) Tokens are generic over the key type used
