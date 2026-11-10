@@ -1,6 +1,6 @@
 [package]
 name = "biscuit-parser-atestum"
-version = "0.2.0-r1"
+version = "0.2.0-r2"
 edition = "2021"
 authors = ["Clément Delafargue <clement@delafargue.name>", "Geoffroy Couprie <contact@geoffroycouprie.com>"]
 description = "Datalog parser used in the biscuit-auth and biscuit-quote crates"

@@ -1,7 +1,7 @@
-# `6.0.0-r1`
+# `6.0.0-r2`
 
-- Fork release based on upstream `main` at 93832a8, whose published version is 6.0.0. The `7.0.0` entries below are upstream's, unreleased at that commit, so this release carries their breaking changes under the 6.0.0 version.
-- Depends on the fork's `biscuit-parser-atestum` 0.2.0-r1 and `biscuit-quote-atestum` 0.3.0-r1, not on the registry copies of upstream's crates. No source changes beyond the package renames.
+- Fork release based on upstream `main` at aa5a672, whose published version is 6.0.0. The `7.0.0` entries below are upstream's, unreleased at that commit, so this release carries their breaking changes under the 6.0.0 version.
+- Depends on the fork's `biscuit-parser-atestum` 0.2.0-r2 and `biscuit-quote-atestum` 0.3.0-r2, not on the registry copies of upstream's crates. No source changes beyond the package renames.
 - Published as `biscuit-auth-atestum`; the library keeps the `biscuit_auth` import path.
 
 # `7.0.0`
@@ -14,6 +14,10 @@
 - `Term` implements `From<Uuid>` with the `uuid` feature.
 - Scope parameters are `Into<PublicKeyData>` so they can take anything which can be converted into a
   public key (including `&K: SerializePublicKey`).
+- `biscuit-auth` and `biscuit-capi` compile for `wasm32-wasip1`: the `Instant` shim based on
+  `performance.now()` is now limited to `wasm32-unknown-unknown`, other wasm targets use
+  `std::time::Instant`.
+- `Authorizer` now carries a step counter that aborts datalog evaluation after a given number of operations. This is more reliable and finer-grained than the timer approach (#352, #357)
 
 ## Breaking changes
 

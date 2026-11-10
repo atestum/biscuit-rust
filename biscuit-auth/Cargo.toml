@@ -1,6 +1,6 @@
 [package]
 name = "biscuit-auth-atestum"
-version = "6.0.0-r1"
+version = "6.0.0-r2"
 description = "an authorization token with decentralized verification and offline attenuation"
 authors = ["Geoffroy Couprie <contact@geoffroycouprie.com>"]
 edition = "2018"
@@ -45,8 +45,8 @@ ed25519-dalek = { version = "3", features = ["rand_core", "zeroize"] }
 serde = { version = "1.0.132", optional = true, features = ["derive"] }
 time = { version = "0.3.7", features = ["formatting", "parsing"] }
 uuid = { version = "1", optional = true }
-biscuit-parser = { package = "biscuit-parser-atestum", version = "0.2.0-r1", path = "../biscuit-parser" }
-biscuit-quote = { package = "biscuit-quote-atestum", version = "0.3.0-r1", optional = true, path = "../biscuit-quote" }
+biscuit-parser = { package = "biscuit-parser-atestum", version = "0.2.0-r2", path = "../biscuit-parser" }
+biscuit-quote = { package = "biscuit-quote-atestum", version = "0.3.0-r2", optional = true, path = "../biscuit-quote" }
 chrono = { version = "0.4.26", optional = true, default-features = false, features = [
   "serde",
 ] }

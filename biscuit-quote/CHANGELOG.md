@@ -1,8 +1,8 @@
-# `0.3.0-r1`
+# `0.3.0-r2`
 
-- Fork release based on upstream `main` at 93832a8, whose `0.4.0` entry below is unreleased upstream. Its source differs from the published 0.3.0.
+- Fork release based on upstream `main` at aa5a672, whose `0.4.0` entry below is unreleased upstream. Its source differs from the published 0.3.0.
 - Published as `biscuit-quote-atestum`; the library keeps the `biscuit_quote` import path.
-- The `biscuit-auth` 7.0.0 that the `0.4.0` entry below requires is this fork's `biscuit-auth-atestum` 6.0.0-r1.
+- The `biscuit-auth` 7.0.0 that the `0.4.0` entry below requires is this fork's `biscuit-auth-atestum` 6.0.0-r2.
 
 # `0.4.0`
 
